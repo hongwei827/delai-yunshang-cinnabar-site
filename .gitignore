@@ -1,0 +1,30 @@
+# Local tooling and generated output
+.playwright-cli/
+output/
+
+# Original business materials are not part of the public website
+MA溯源中心朱砂各大类产品信息/
+公司相关荣誉牌/
+养心安神枕/
+德莱云上产品主图详情图/
+德莱云上公司介绍和部门介绍/
+振东朱砂/
+香合道珠/
+
+# Source documents and large raw assets
+*.doc
+*.docx
+*.ppt
+*.pptx
+*.pdf
+*.mp4
+*.mov
+*.avi
+
+# Unused high-resolution originals
+images/hero/collection.jpg
+images/brand/honor-heritage.png
+images/brand/honor-xubeihong.jpg
+
+# Standalone source logo; the web-ready copy lives under images/brand
+/德莱云上1比1logo高清.jpg
