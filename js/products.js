@@ -12,6 +12,27 @@ window.PRODUCT_CATEGORIES = [
   { id: "trace", label: "溯源臻选类", short: "溯源" }
 ];
 
+/*
+ * 图片分级加载：
+ * - 产品列表使用轻量缩略图；
+ * - 详情主图使用 1600px WebP；
+ * - 详情缩略导航使用 360px WebP。
+ * 原始图片路径仍保留在产品数据中，加载失败时可自动回退。
+ */
+window.getOptimizedProductImage = function (source) {
+  const match = source.match(/^images\/products\/(.+)\.(png|jpe?g)$/i);
+  return match ? `images/optimized/products/${match[1]}.webp` : source;
+};
+
+window.getProductThumbnail = function (product) {
+  return `images/thumbnails/${product.id}.webp`;
+};
+
+window.getGalleryThumbnail = function (source) {
+  const fileName = source.split("/").pop().replace(/\.[^.]+$/, "");
+  return `images/thumbnails/gallery/${fileName}.webp`;
+};
+
 window.PRODUCTS = [
   {
     id: "red-crystal-bracelet",

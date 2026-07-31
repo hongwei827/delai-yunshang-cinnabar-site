@@ -77,15 +77,16 @@
   }
 
   function productDetailHref(productId) {
-    return `product.html?v=20260731c#${encodeURIComponent(productId)}`;
+    return `product.html?v=20260731e#${encodeURIComponent(productId)}`;
   }
 
   function productCard(product, index, featured = false) {
     const modifier = featured && index === 0 ? " product-card--large" : "";
+    const thumbnail = window.getProductThumbnail?.(product) || product.images[0];
     return `
       <article class="product-card${modifier} reveal is-visible" data-category="${product.category}">
         <a class="product-card__image" href="${productDetailHref(product.id)}" aria-label="查看${product.name}详情">
-          <img src="${product.images[0]}" alt="${product.name}" loading="lazy" decoding="async">
+          <img src="${thumbnail}" data-fallback-src="${product.images[0]}" alt="${product.name}" width="900" height="900" loading="lazy" decoding="async">
           <span class="product-card__view">查看详情 ${arrowIcon()}</span>
         </a>
         <div class="product-card__body">
@@ -95,6 +96,17 @@
         </div>
       </article>`;
   }
+
+  /* 优化图异常时只回退一次，避免空白图片或重复请求。 */
+  document.addEventListener("error", (event) => {
+    const image = event.target;
+    if (!(image instanceof HTMLImageElement)) return;
+    if (image.id === "detail-main-image") return;
+    const fallback = image.dataset.fallbackSrc;
+    if (!fallback || image.dataset.fallbackUsed === "true") return;
+    image.dataset.fallbackUsed = "true";
+    image.src = fallback;
+  }, true);
 
   const featuredGrid = document.querySelector("#featured-grid");
   if (featuredGrid && window.PRODUCTS) {
@@ -114,7 +126,7 @@
       (category) => `<button class="filter-button" type="button" data-filter="${category.id}">${category.label}</button>`
     ).join("");
 
-    function renderProducts(categoryId) {
+    function renderProducts(categoryId, instant = false) {
       const products = (categoryId === "all"
         ? window.PRODUCTS
         : window.PRODUCTS.filter((product) => product.category === categoryId))
@@ -124,11 +136,17 @@
           return categoryIds.indexOf(a.category) - categoryIds.indexOf(b.category);
         });
 
-      productGrid.classList.add("is-updating");
-      window.setTimeout(() => {
+      const commitProducts = () => {
         productGrid.innerHTML = products.map((product, index) => productCard(product, index)).join("");
         productGrid.classList.remove("is-updating");
-      }, 130);
+      };
+
+      if (instant) {
+        commitProducts();
+      } else {
+        productGrid.classList.add("is-updating");
+        window.setTimeout(commitProducts, 130);
+      }
 
       filterBar.querySelectorAll(".filter-button").forEach((button) => {
         const active = button.dataset.filter === categoryId;
@@ -151,7 +169,7 @@
     const initialCategory = window.PRODUCT_CATEGORIES.some((category) => category.id === queryCategory)
       ? queryCategory
       : "all";
-    renderProducts(initialCategory);
+    renderProducts(initialCategory, true);
 
     filterBar.addEventListener("click", (event) => {
       const button = event.target.closest("[data-filter]");

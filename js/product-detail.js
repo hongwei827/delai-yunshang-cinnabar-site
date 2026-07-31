@@ -10,7 +10,7 @@
   const product = window.PRODUCTS.find((item) => item.id === requestedId);
 
   function productDetailHref(productId) {
-    return `product.html?v=20260731c#${encodeURIComponent(productId)}`;
+    return `product.html?v=20260731e#${encodeURIComponent(productId)}`;
   }
 
   if (!product) {
@@ -70,7 +70,11 @@
     mainImage.setAttribute("aria-busy", "true");
 
     const applyImage = () => {
-      mainImage.src = product.images[index];
+      const originalImage = product.images[index];
+      const optimizedImage = window.getOptimizedProductImage?.(originalImage) || originalImage;
+      mainImage.dataset.fallbackSrc = originalImage;
+      mainImage.dataset.fallbackUsed = String(optimizedImage === originalImage);
+      mainImage.src = optimizedImage;
       mainImage.alt = initial ? `${product.name}产品主图` : `${product.name}产品图 ${index + 1}`;
       if (mainImage.complete && mainImage.naturalWidth > 0) revealMainImage();
     };
@@ -93,6 +97,12 @@
   if (mainImage && thumbnails) {
     mainImage.addEventListener("load", revealMainImage);
     mainImage.addEventListener("error", () => {
+      const fallback = mainImage.dataset.fallbackSrc;
+      if (fallback && mainImage.dataset.fallbackUsed !== "true") {
+        mainImage.dataset.fallbackUsed = "true";
+        mainImage.src = fallback;
+        return;
+      }
       galleryMain?.classList.remove("is-loaded");
       mainImage.classList.remove("is-changing");
       mainImage.setAttribute("aria-busy", "false");
@@ -101,7 +111,7 @@
 
     thumbnails.innerHTML = product.images.map((image, index) => `
       <button type="button" aria-label="查看第 ${index + 1} 张产品图" aria-pressed="${index === 0}">
-        <img src="${image}" alt="" loading="lazy">
+        <img src="${window.getGalleryThumbnail?.(image) || image}" data-fallback-src="${image}" alt="" width="360" height="360" loading="lazy" decoding="async">
       </button>
     `).join("");
     thumbnails.querySelector("button")?.classList.add("is-active");
@@ -132,7 +142,7 @@
     relatedGrid.innerHTML = related.map((item) => `
       <article class="related-card">
         <a href="${productDetailHref(item.id)}" class="related-card__image">
-          <img src="${item.images[0]}" alt="${item.name}" loading="lazy">
+          <img src="${window.getProductThumbnail?.(item) || item.images[0]}" data-fallback-src="${item.images[0]}" alt="${item.name}" width="900" height="900" loading="lazy" decoding="async">
         </a>
         <div>
           <p>${window.PRODUCT_CATEGORIES.find((categoryItem) => categoryItem.id === item.category)?.label || "朱砂臻品"}</p>
