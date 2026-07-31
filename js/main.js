@@ -77,7 +77,7 @@
   }
 
   function productDetailHref(productId) {
-    return `product.html#${encodeURIComponent(productId)}`;
+    return `product.html?v=20260731a#${encodeURIComponent(productId)}`;
   }
 
   function productCard(product, index, featured = false) {

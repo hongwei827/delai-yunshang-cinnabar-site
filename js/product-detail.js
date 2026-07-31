@@ -10,7 +10,7 @@
   const product = window.PRODUCTS.find((item) => item.id === requestedId);
 
   function productDetailHref(productId) {
-    return `product.html#${encodeURIComponent(productId)}`;
+    return `product.html?v=20260731a#${encodeURIComponent(productId)}`;
   }
 
   if (!product) {
