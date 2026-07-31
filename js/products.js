@@ -37,7 +37,7 @@ window.PRODUCTS = [
     tagline: "晶体肌理，光下见真章",
     description: "保留天然晶体砂独特的矿物肌理，以细致打磨展现晶体光泽。每一串在纹理与色泽上都略有差异，形成独一无二的自然印记。",
     meaning: "取晶石坚韧与圆珠和合之意，寄托坚定、圆满的美好愿望。",
-    images: ["images/products/bracelet-crystal-1.png", "images/products/bracelet-crystal-2.png", "images/products/bracelet-crystal-3.png"]
+    images: ["images/products/bracelet-crystal-1.png", "images/products/bracelet-crystal-2.png", "images/products/bracelet-crystal-3.png", "images/products/bracelet-crystal-4.webp", "images/products/bracelet-crystal-5.webp", "images/products/bracelet-crystal-6.webp"]
   },
   {
     id: "diy-red-bracelet",
@@ -61,7 +61,7 @@ window.PRODUCTS = [
     tagline: "圆满无缺，岁岁享平安",
     description: "经典平安扣形制与天然红晶砂相结合，保留圆润饱满的轮廓与细腻砂感。多种编绳风格可适配不同年龄与佩戴场景。",
     meaning: "平安扣外圆内圆，取圆满通达、平安顺遂之意，是东方饰品中经久不衰的吉祥形制。",
-    images: ["images/products/pendant-pingan-1.png", "images/products/pendant-pingan-2.png", "images/products/pendant-pingan-3.png"],
+    images: ["images/products/pendant-pingan-1.png", "images/products/pendant-pingan-2.png", "images/products/pendant-pingan-3.png", "images/products/pendant-pingan-4.webp", "images/products/pendant-pingan-5.webp"],
     featured: true,
     featuredOrder: 5
   },
@@ -124,7 +124,7 @@ window.PRODUCTS = [
     tagline: "三花映彩，乾坤有序",
     description: "以流畅圆环为主体，点缀珐琅彩花饰，将朱砂红与金色细节相衬，形成明快又庄重的新中式手饰。",
     meaning: "圆环象征圆满，三花寄托花开见喜、和美相伴。",
-    images: ["images/products/bangle-threeflower-1.png", "images/products/bangle-threeflower-2.png", "images/products/bangle-threeflower-3.png"],
+    images: ["images/products/bangle-threeflower-1.png", "images/products/bangle-threeflower-2.png", "images/products/bangle-threeflower-3.png", "images/products/bangle-threeflower-4.webp", "images/products/bangle-threeflower-5.webp"],
     featured: true
   },
   {
@@ -149,7 +149,7 @@ window.PRODUCTS = [
     tagline: "一抹朱红，点亮东方气韵",
     description: "将朱砂红浓缩为耳畔的一点亮色，造型精巧利落，可与日常通勤或新中式服饰自然搭配。",
     meaning: "朱红点睛，寓意见喜、添彩。",
-    images: ["images/products/accessory-earrings-1.png", "images/products/accessory-earrings-2.png", "images/products/accessory-earrings-3.png"]
+    images: ["images/products/accessory-earrings-1.png", "images/products/accessory-earrings-2.png", "images/products/accessory-earrings-3.png", "images/products/accessory-earrings-4.webp", "images/products/accessory-earrings-5.webp"]
   },
   {
     id: "pixiu-charm",
@@ -185,7 +185,7 @@ window.PRODUCTS = [
     tagline: "原矿入景，方寸藏山河",
     description: "将天然朱砂原石封存于透明球体中，保留矿物天然纹理，并搭配主题雕刻底座，适合案头陈设、商务礼赠与个人收藏。",
     meaning: "圆球象征圆融完整；水晶球转动的视觉意象寄托时来运转、财源广进。",
-    images: ["images/products/decor-sphere-1.png", "images/products/decor-sphere-2.png", "images/products/decor-sphere-3.png"],
+    images: ["images/products/decor-sphere-1.png", "images/products/decor-sphere-2.png", "images/products/decor-sphere-3.png", "images/products/decor-sphere-4.jpg", "images/products/decor-sphere-5.jpg", "images/products/decor-sphere-6.jpg"],
     featured: true
   },
   {
@@ -222,7 +222,7 @@ window.PRODUCTS = [
     tagline: "矿物入画，色凝千年",
     description: "以贵州高品质朱砂为创作材料，融合传统矿物颜料技法与现代构图。浓郁朱红在光影中呈现深浅变化，适合艺术陈设与高端礼赠。",
     meaning: "万山红遍象征山河壮丽、事业兴盛与鸿运绵长。",
-    images: ["images/products/painting-wanshan-gallery.webp", "images/products/painting-1.png", "images/products/painting-2.png", "images/products/painting-3.png"],
+    images: ["images/products/painting-wanshan-gallery.webp", "images/products/painting-1.png", "images/products/painting-2.png", "images/products/painting-3.png", "images/products/painting-wanshan-5.webp", "images/products/painting-wanshan-6.webp"],
     featured: true
   },
   {
@@ -245,9 +245,9 @@ window.PRODUCTS = [
     material: "天然香材、朱砂主题配珠、手工编绳",
     size: "多种香方与珠径可选，手围可调",
     tagline: "古方合香，腕间清雅",
-    description: "以传统合香理念为灵感，将天然香材制成温润珠体，并以朱砂主题配珠点睛。玫瑰、香肌、辟暑、薰衣等不同香韵均采用东方场景呈现，适合作为日常雅佩与文化礼赠。",
+    description: "以传统合香理念为灵感，将天然香材制成温润珠体，并以朱砂主题配珠点睛。玫瑰疏肝、香肌润颜、辟暑驱蚊、薰衣祛湿、气血调经与苏厥通痹六款香韵均采用东方场景呈现，适合作为日常雅佩与文化礼赠。",
     meaning: "合香承载古人用香、品香与修心的生活美学，圆珠相连寓意和合圆满、雅意常伴。",
-    images: ["images/products/wellness-incense-1.jpg", "images/products/wellness-incense-2.jpg", "images/products/wellness-incense-3.jpg", "images/products/wellness-incense-4.jpg"],
+    images: ["images/products/wellness-incense-1.jpg", "images/products/wellness-incense-2.jpg", "images/products/wellness-incense-3.jpg", "images/products/wellness-incense-4.jpg", "images/products/wellness-incense-5.jpg", "images/products/wellness-incense-6.jpg"],
     featured: true,
     featuredOrder: 1
   },
@@ -257,11 +257,11 @@ window.PRODUCTS = [
     name: "朱砂养心安神枕",
     number: "DLYS-KY-002",
     material: "锦缎枕套、草本填充层、朱砂主题复合草本包",
-    size: "礼盒装，具体尺寸以实物为准",
+    size: "约 58 × 36.5cm，约 1500g",
     tagline: "层叠匠作，安享静谧",
     description: "采用锦缎枕套、无纺布内胆、荞麦壳填充与复合草本包的分层结构，兼顾支撑、透气与日常使用体验。产品配有完整礼盒包装，适合家庭关怀与节庆礼赠。",
     meaning: "以枕寄情，承载对家人安然休憩、从容生活的温厚祝愿。",
-    images: ["images/products/wellness-pillow-1.jpg", "images/products/wellness-pillow-2.jpg", "images/products/wellness-pillow-3.jpg"],
+    images: ["images/products/wellness-pillow-1.jpg", "images/products/wellness-pillow-2.jpg", "images/products/wellness-pillow-3.jpg", "images/products/wellness-pillow-4.webp", "images/products/wellness-pillow-5.webp", "images/products/wellness-pillow-6.webp", "images/products/wellness-pillow-7.webp"],
     featured: true,
     featuredOrder: 2
   },
@@ -276,7 +276,7 @@ window.PRODUCTS = [
     tagline: "朱砂入陶，一席清香",
     description: "以陶艺塑形承载朱砂呈色，器身保留手作肌理与描金细节，可置于茶席、书房与香事空间。选用资料中带有完整品名说明的规范场景图展示。",
     meaning: "香席清雅，朱红温厚，寄托静心自持、和美安然的东方生活意趣。",
-    images: ["images/products/heritage-incense-holder-1.webp", "images/products/heritage-incense-holder-2.webp", "images/products/heritage-incense-holder-3.webp"],
+    images: ["images/products/heritage-incense-holder-1.webp", "images/products/heritage-incense-holder-2.webp", "images/products/heritage-incense-holder-3.webp", "images/products/heritage-incense-holder-4.webp", "images/products/heritage-incense-holder-5.webp"],
     featured: true,
     featuredOrder: 3
   },
@@ -339,7 +339,7 @@ window.PRODUCTS.push(
     tagline: "原生矿纹，一串一天成",
     description: "精选保留天然矿物纹理的朱砂原石珠，经打磨、抛光与手工串制，呈现每串各不相同的色泽肌理。",
     meaning: "取天然本真与圆珠和合之意，寄托坚定、圆满与守正的美好愿景。",
-    images: ["images/products/bracelet-raw-stone-1.webp", "images/products/bracelet-raw-stone-2.webp", "images/products/bracelet-raw-stone-3.webp", "images/products/bracelet-raw-stone-4.webp", "images/products/bracelet-raw-stone-5.webp"]
+    images: ["images/products/bracelet-raw-stone-5.webp", "images/products/bracelet-raw-stone-2.webp", "images/products/bracelet-raw-stone-3.webp", "images/products/bracelet-raw-stone-4.webp", "images/products/bracelet-raw-stone-1.webp"]
   },
   {
     id: "crystal-pingan-pendant",

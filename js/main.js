@@ -76,17 +76,21 @@
     return '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
   }
 
+  function productDetailHref(productId) {
+    return `product.html#${encodeURIComponent(productId)}`;
+  }
+
   function productCard(product, index, featured = false) {
     const modifier = featured && index === 0 ? " product-card--large" : "";
     return `
       <article class="product-card${modifier} reveal is-visible" data-category="${product.category}">
-        <a class="product-card__image" href="product.html?id=${encodeURIComponent(product.id)}" aria-label="查看${product.name}详情">
+        <a class="product-card__image" href="${productDetailHref(product.id)}" aria-label="查看${product.name}详情">
           <img src="${product.images[0]}" alt="${product.name}" loading="lazy" decoding="async">
           <span class="product-card__view">查看详情 ${arrowIcon()}</span>
         </a>
         <div class="product-card__body">
           <p class="product-card__category">${productCategoryLabel(product)}</p>
-          <h3><a href="product.html?id=${encodeURIComponent(product.id)}">${product.name}</a></h3>
+          <h3><a href="${productDetailHref(product.id)}">${product.name}</a></h3>
           <p>${product.tagline}</p>
         </div>
       </article>`;

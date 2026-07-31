@@ -5,10 +5,29 @@
   if (!window.PRODUCTS) return;
 
   const params = new URLSearchParams(window.location.search);
-  const requestedId = params.get("id");
-  const product = window.PRODUCTS.find((item) => item.id === requestedId)
-    || window.PRODUCTS.find((item) => item.id === "red-pingan-pendant")
-    || window.PRODUCTS[0];
+  const hashId = decodeURIComponent(window.location.hash.slice(1)).replace(/^id=/, "");
+  const requestedId = params.get("id") || hashId;
+  const product = window.PRODUCTS.find((item) => item.id === requestedId);
+
+  function productDetailHref(productId) {
+    return `product.html#${encodeURIComponent(productId)}`;
+  }
+
+  if (!product) {
+    document.title = "产品未找到｜德莱云上朱砂";
+    const detailSection = document.querySelector(".detail-main");
+    if (detailSection) {
+      detailSection.innerHTML = `
+        <div class="container detail-empty">
+          <p class="section-kicker">Product Gallery</p>
+          <h1>未找到对应产品</h1>
+          <p>该产品链接可能已更新，请返回产品图集重新选择。</p>
+          <a class="button button--primary" href="products.html">返回产品图集</a>
+        </div>`;
+    }
+    document.querySelector("#related-grid")?.closest(".related-section")?.remove();
+    return;
+  }
 
   const category = window.PRODUCT_CATEGORIES.find((item) => item.id === product.category);
   document.title = `${product.name}｜德莱云上朱砂`;
@@ -87,14 +106,16 @@
     const related = [...sameCategory, ...fallback].slice(0, 3);
     relatedGrid.innerHTML = related.map((item) => `
       <article class="related-card">
-        <a href="product.html?id=${encodeURIComponent(item.id)}" class="related-card__image">
+        <a href="${productDetailHref(item.id)}" class="related-card__image">
           <img src="${item.images[0]}" alt="${item.name}" loading="lazy">
         </a>
         <div>
           <p>${window.PRODUCT_CATEGORIES.find((categoryItem) => categoryItem.id === item.category)?.label || "朱砂臻品"}</p>
-          <h3><a href="product.html?id=${encodeURIComponent(item.id)}">${item.name}</a></h3>
+          <h3><a href="${productDetailHref(item.id)}">${item.name}</a></h3>
         </div>
       </article>
     `).join("");
   }
+
+  window.addEventListener("hashchange", () => window.location.reload());
 })();
