@@ -272,7 +272,7 @@ a {
   position: relative;
   min-height: min(820px, 84svh);
   color: var(--white);
-  background: #180c0d url("../images/hero/collection-web.jpg") center 48% / cover no-repeat;
+  background: #180c0d url("../images/optimized/hero/collection.webp") center 48% / cover no-repeat;
   overflow: hidden;
 }
 
@@ -1048,7 +1048,7 @@ a {
 .closing-cta {
   position: relative;
   overflow: hidden;
-  background: #2a1012 url("../images/hero/collection-web.jpg") center 48% / cover no-repeat;
+  background: #2a1012 url("../images/optimized/hero/collection.webp") center 48% / cover no-repeat;
   color: var(--white);
 }
 
@@ -1157,7 +1157,7 @@ a {
   align-items: end;
   padding: calc(var(--header-height) + 90px) 0 80px;
   overflow: hidden;
-  background: #251315 url("../images/hero/collection-web.jpg") center 48% / cover no-repeat;
+  background: #251315 url("../images/optimized/hero/collection.webp") center 48% / cover no-repeat;
   color: var(--white);
 }
 
@@ -1554,7 +1554,7 @@ a {
   display: flex;
   align-items: end;
   padding: calc(var(--header-height) + 100px) 0 92px;
-  background: #242526 url("../images/brand/company-hq.jpg") center / cover no-repeat;
+  background: #242526 url("../images/optimized/brand/company-hq.webp") center / cover no-repeat;
   color: var(--white);
 }
 
@@ -1950,6 +1950,19 @@ a {
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* 长图集仅在接近视口时绘制，降低手机滚动时的布局与绘制负担。 */
+@supports (content-visibility: auto) {
+  .product-grid .product-card {
+    content-visibility: auto;
+    contain-intrinsic-block-size: auto 520px;
+  }
+
+  .honor-item {
+    content-visibility: auto;
+    contain-intrinsic-block-size: auto 480px;
+  }
 }
 
 @media (max-width: 1080px) {
