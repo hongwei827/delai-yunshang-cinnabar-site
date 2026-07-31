@@ -10,6 +10,7 @@
   function setMenu(open) {
     if (!menuButton || !nav) return;
     menuButton.setAttribute("aria-expanded", String(open));
+    menuButton.setAttribute("aria-label", open ? "关闭导航菜单" : "打开导航菜单");
     nav.classList.toggle("is-open", open);
     body.classList.toggle("menu-open", open);
   }
@@ -66,6 +67,11 @@
     return window.PRODUCT_CATEGORIES?.find((item) => item.id === categoryId)?.label || "朱砂臻品";
   }
 
+  function productCategoryLabel(product) {
+    const label = categoryLabel(product.category);
+    return product.subcategory ? `${label} · ${product.subcategory}` : label;
+  }
+
   function arrowIcon() {
     return '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg>';
   }
@@ -79,7 +85,7 @@
           <span class="product-card__view">查看详情 ${arrowIcon()}</span>
         </a>
         <div class="product-card__body">
-          <p class="product-card__category">${categoryLabel(product.category)}</p>
+          <p class="product-card__category">${productCategoryLabel(product)}</p>
           <h3><a href="product.html?id=${encodeURIComponent(product.id)}">${product.name}</a></h3>
           <p>${product.tagline}</p>
         </div>
@@ -105,9 +111,14 @@
     ).join("");
 
     function renderProducts(categoryId) {
-      const products = categoryId === "all"
+      const products = (categoryId === "all"
         ? window.PRODUCTS
-        : window.PRODUCTS.filter((product) => product.category === categoryId);
+        : window.PRODUCTS.filter((product) => product.category === categoryId))
+        .slice()
+        .sort((a, b) => {
+          const categoryIds = window.PRODUCT_CATEGORIES.map((category) => category.id);
+          return categoryIds.indexOf(a.category) - categoryIds.indexOf(b.category);
+        });
 
       productGrid.classList.add("is-updating");
       window.setTimeout(() => {

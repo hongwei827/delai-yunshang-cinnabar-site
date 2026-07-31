@@ -18,7 +18,7 @@
     if (element) element.textContent = value;
   };
 
-  setText("#detail-category", category?.label || "朱砂臻品");
+  setText("#detail-category", `${category?.label || "朱砂臻品"}${product.subcategory ? ` · ${product.subcategory}` : ""}`);
   setText("#detail-name", product.name);
   setText("#detail-number", product.number);
   setText("#detail-material", product.material);
