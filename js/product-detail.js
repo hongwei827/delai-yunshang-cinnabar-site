@@ -10,7 +10,7 @@
   const product = window.PRODUCTS.find((item) => item.id === requestedId);
 
   function productDetailHref(productId) {
-    return `product.html?v=20260731a#${encodeURIComponent(productId)}`;
+    return `product.html?v=20260731c#${encodeURIComponent(productId)}`;
   }
 
   if (!product) {
@@ -53,18 +53,36 @@
   }
 
   const mainImage = document.querySelector("#detail-main-image");
+  const galleryMain = mainImage?.closest(".gallery-main");
   const thumbnails = document.querySelector("#detail-thumbnails");
   let currentIndex = 0;
 
-  function selectImage(index) {
+  function revealMainImage() {
+    if (!mainImage) return;
+    galleryMain?.classList.add("is-loaded");
+    mainImage.classList.remove("is-changing");
+    mainImage.setAttribute("aria-busy", "false");
+  }
+
+  function selectImage(index, initial = false) {
     if (!mainImage || !product.images[index]) return;
     currentIndex = index;
-    mainImage.classList.add("is-changing");
-    window.setTimeout(() => {
+    mainImage.setAttribute("aria-busy", "true");
+
+    const applyImage = () => {
       mainImage.src = product.images[index];
-      mainImage.alt = `${product.name}产品图 ${index + 1}`;
-      mainImage.classList.remove("is-changing");
-    }, 120);
+      mainImage.alt = initial ? `${product.name}产品主图` : `${product.name}产品图 ${index + 1}`;
+      if (mainImage.complete && mainImage.naturalWidth > 0) revealMainImage();
+    };
+
+    if (initial) {
+      galleryMain?.classList.remove("is-loaded");
+      applyImage();
+    } else {
+      mainImage.classList.add("is-changing");
+      window.setTimeout(applyImage, 120);
+    }
+
     thumbnails?.querySelectorAll("button").forEach((button, buttonIndex) => {
       const active = buttonIndex === index;
       button.classList.toggle("is-active", active);
@@ -73,14 +91,21 @@
   }
 
   if (mainImage && thumbnails) {
-    mainImage.src = product.images[0];
-    mainImage.alt = `${product.name}产品主图`;
+    mainImage.addEventListener("load", revealMainImage);
+    mainImage.addEventListener("error", () => {
+      galleryMain?.classList.remove("is-loaded");
+      mainImage.classList.remove("is-changing");
+      mainImage.setAttribute("aria-busy", "false");
+      mainImage.alt = `${product.name}产品图片暂时无法加载`;
+    });
+
     thumbnails.innerHTML = product.images.map((image, index) => `
       <button type="button" aria-label="查看第 ${index + 1} 张产品图" aria-pressed="${index === 0}">
         <img src="${image}" alt="" loading="lazy">
       </button>
     `).join("");
     thumbnails.querySelector("button")?.classList.add("is-active");
+    selectImage(0, true);
     thumbnails.addEventListener("click", (event) => {
       const button = event.target.closest("button");
       if (!button) return;

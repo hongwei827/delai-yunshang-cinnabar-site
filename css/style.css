@@ -1321,14 +1321,24 @@ a {
   position: relative;
   aspect-ratio: 1 / 1;
   overflow: hidden;
-  background: #e7ded0;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(200, 167, 106, 0.24), transparent 34%),
+    linear-gradient(135deg, #f2ebe1 0%, #e4d6c3 52%, #eee5da 100%);
 }
 
 .gallery-main img {
+  position: relative;
+  z-index: 1;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: opacity 0.2s ease, transform 0.5s ease;
+  opacity: 0;
+  transition: opacity 0.32s ease, transform 0.5s ease;
+}
+
+.gallery-main.is-loaded img {
+  opacity: 1;
 }
 
 .gallery-main img.is-changing {
@@ -1338,6 +1348,7 @@ a {
 
 .gallery-arrow {
   position: absolute;
+  z-index: 2;
   top: 50%;
   width: 44px;
   height: 44px;
